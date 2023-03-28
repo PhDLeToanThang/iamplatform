@@ -1,8 +1,20 @@
 #!/bin/bash
 clear
 cd ~
+############### Tham số cần thay đổi ở đây ###################
+echo "FQDN: e.g: portal.company.vn"   # Đổi địa chỉ web thứ nhất Website Master for Resource code - để tạo cùng 1 Source code duy nhất 
+read -e FQDN
+
+echo "run install? (y/n)"
+read -e run
+if [ "$run" == n ] ; then
+  exit
+else
+
 #Step 1. First, we will install Heimdall 2.2.2 dashboard from its GitHub repo:
 cd /opt
+mkdir heimdall
+cd /heimdall
 RELEASE=$(curl -sX GET "https://api.github.com/repos/linuxserver/Heimdall/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]'); echo $RELEASE &&\
 curl --silent -o ${RELEASE}.tar.gz -L "https://github.com/linuxserver/Heimdall/archive/${RELEASE}.tar.gz"
 
@@ -70,3 +82,19 @@ sudo systemctl enable --now portal.service
 #The reason is that if you are the only user of Heimdall, the current setup will be fine (Thinks of you as the developer). 
 #The complexity of using these web servers outweighs the gain of high-performance. 
 
+
+#Step 5. Install Certbot
+sudo apt install certbot python3-certbot-nginx
+sudo certbot --nginx -d $FQDN
+
+# You should test your configuration at:
+# https://www.ssllabs.com/ssltest/analyze.html?d=$FQDN
+#/etc/letsencrypt/live/$FQDN/fullchain.pem
+#   Your key file has been saved at:
+#   /etc/letsencrypt/live/$FQDN/privkey.pem
+#   Your cert will expire on yyyy-mm-dd. To obtain a new or tweaked
+#   version of this certificate in the future, simply run certbot again
+#   with the "certonly" option. To non-interactively renew *all* of
+#   your certificates, run "certbot renew"
+
+fi
