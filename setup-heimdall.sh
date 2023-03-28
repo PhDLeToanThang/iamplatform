@@ -73,7 +73,7 @@ echo 'RestartSec=5' >> /etc/systemd/system/portal.service
 echo 'Type=simple' >> /etc/systemd/system/portal.service
 echo 'User=lgtm' >> /etc/systemd/system/portal.service
 echo 'Group=lgtm' >> /etc/systemd/system/portal.service
-echo 'WorkingDirectory=/var/www/html/$FQDN' >> /etc/systemd/system/portal.service
+echo 'WorkingDirectory=/var/www/html/${FQDN}' >> /etc/systemd/system/portal.service
 echo 'ExecStart="/usr/bin/php" artisan serve --port 7889' >> /etc/systemd/system/portal.service
 echo 'TimeoutStopSec=30' >> /etc/systemd/system/portal.service
 echo '[Install]' >> /etc/systemd/system/portal.service
@@ -91,8 +91,69 @@ sudo systemctl enable --now portal.service
 #The reason is that if you are the only user of Heimdall, the current setup will be fine (Thinks of you as the developer). 
 #The complexity of using these web servers outweighs the gain of high-performance. 
 
+#Step 5. Configure NGINX
+#Next, you will need to create an Nginx virtual host configuration file to host FileRun:
+sudo rm /etc/nginx/conf.d/$FQDN.conf
+echo 'server {'  >> /etc/nginx/conf.d/$FQDN.conf
+echo '    root '/var/www/html/${FQDN}';'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    index index.php index.html index.htm;'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    server_name '${FQDN}';'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    client_max_body_size 512M;'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    autoindex off;'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    location / {'>> /etc/nginx/conf.d/$FQDN.conf
+echo '        try_files $uri $uri/ =404;'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    }'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    #enable gzip compression:'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    gzip on;'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    gzip_vary on;'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    gzip_min_length 1000;'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    gzip_comp_level 5;'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    gzip_types application/json text/css application/x-javascript application/javascript image/svg+xml;'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    gzip_proxied any;'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    # A long browser cache lifetime can speed up repeat visits to your page:'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    location ~* \.(jpg|jpeg|gif|png|webp|svg|woff|woff2|ttf|css|js|ico|xml)$ {'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    access_log        off;'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    log_not_found     off;'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    expires           360d;'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    }'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    # disable access to hidden files'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    location ~ /\.ht {'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    access_log off;'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    log_not_found off;'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    deny all;'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    }'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    location /dataroot/ {'>> /etc/nginx/conf.d/$FQDN.conf
+echo '      internal;'>> /etc/nginx/conf.d/$FQDN.conf
+echo '      alias '/var/www/html/$FOLDERDATA/';'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    }'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    location ~ [^/].php(/|$) {'>> /etc/nginx/conf.d/$FQDN.conf
+echo '        include snippets/fastcgi-php.conf;'>> /etc/nginx/conf.d/$FQDN.conf
+echo '        fastcgi_pass unix:/run/php/php8.2-fpm.sock;'>> /etc/nginx/conf.d/$FQDN.conf
+echo '        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;'>> /etc/nginx/conf.d/$FQDN.conf
+echo '        include fastcgi_params;'>> /etc/nginx/conf.d/$FQDN.conf
+echo '    }'>> /etc/nginx/conf.d/$FQDN.conf
+echo '	  location ~ ^/(doc|sql|setup)/{'>> /etc/nginx/conf.d/$FQDN.conf
+echo '		deny all;'>> /etc/nginx/conf.d/$FQDN.conf
+echo '	  }'>> /etc/nginx/conf.d/$FQDN.conf
+echo '}'>> /etc/nginx/conf.d/$FQDN.conf
 
-#Step 5. Install Certbot
+# Step 6. Uninstall apache:
+sudo service apache2 stop
+sudo apt-get purge apache2 apache2-utils apache2.2-bin apache2-common
+sudo apt-get purge apache2 apache2-utils apache2-bin apache2.2-common
+
+sudo apt-get autoremove
+whereis apache2
+#apache2: /etc/apache2
+sudo rm -rf /etc/apache2
+
+sudo systemctl restart nginx
+systemctl restart php8.2-fpm.service
+
+sudo nginx -t
+sudo systemctl reload nginx
+
+#Step 7. Install Certbot
 sudo apt install certbot python3-certbot-nginx
 sudo certbot --nginx -d $FQDN
 
