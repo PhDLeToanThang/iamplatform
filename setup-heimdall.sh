@@ -4,6 +4,8 @@ cd ~
 ############### Tham số cần thay đổi ở đây ###################
 echo "FQDN: e.g: portal.company.vn"   # Đổi địa chỉ web thứ nhất Website Master for Resource code - để tạo cùng 1 Source code duy nhất 
 read -e FQDN
+echo "Portal Folder Data: e.g: portaldata"   # Tên Thư mục chưa Data vs Cache
+read -e FOLDERDATA
 
 echo "run install? (y/n)"
 read -e run
@@ -13,12 +15,19 @@ else
 
 #Step 1. First, we will install Heimdall 2.2.2 dashboard from its GitHub repo:
 cd /opt
-mkdir heimdall
-cd /heimdall
-RELEASE=$(curl -sX GET "https://api.github.com/repos/linuxserver/Heimdall/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]'); echo $RELEASE &&\
-curl --silent -o ${RELEASE}.tar.gz -L "https://github.com/linuxserver/Heimdall/archive/${RELEASE}.tar.gz"
 
-tar xvzf Heimdall-*.tar.gz
+#RELEASE=$(curl -sX GET "https://api.github.com/repos/linuxserver/Heimdall/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]'); echo $RELEASE &&\
+#curl --silent -o ${RELEASE}.tar.gz -L "https://github.com/linuxserver/Heimdall/archive/${RELEASE}.tar.gz"
+wget https://github.com/linuxserver/Heimdall/archive/refs/tags/v2.5.6.tar.gz
+tar xvzf *.tar.gz
+
+sudo cp -R /opt/Heimdall-2.5.6 /var/www/html/$FQDN
+sudo mkdir /var/www/html/$FOLDERDATA
+#Change the folder permissions.
+sudo chown -R www-data:www-data /var/www/html/$FQDN/ 
+sudo chmod -R 755 /var/www/html/$FQDN/ 
+sudo chown www-data /var/www/html/$FOLDERDATA
+
 
 #Step 2. Install PHP modules on Ubuntu 20.04:
 # Next, because Heimdall is written in PHP and more specifically, the Laravel PHP web framework, 
@@ -64,7 +73,7 @@ echo 'RestartSec=5' >> /etc/systemd/system/portal.service
 echo 'Type=simple' >> /etc/systemd/system/portal.service
 echo 'User=lgtm' >> /etc/systemd/system/portal.service
 echo 'Group=lgtm' >> /etc/systemd/system/portal.service
-echo 'WorkingDirectory=/home/lgtm/Heimdall-2.2.2' >> /etc/systemd/system/portal.service
+echo 'WorkingDirectory=/var/www/html/$FQDN' >> /etc/systemd/system/portal.service
 echo 'ExecStart="/usr/bin/php" artisan serve --port 7889' >> /etc/systemd/system/portal.service
 echo 'TimeoutStopSec=30' >> /etc/systemd/system/portal.service
 echo '[Install]' >> /etc/systemd/system/portal.service
