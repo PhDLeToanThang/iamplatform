@@ -13,7 +13,7 @@
 <!-- The realm to use for the application -->
 <add key="ida:Wtrealm" value="https://myWebServer/myWebApplication" />
 <!-- The ADFS metadata address -->
-<add key="ida:ADFSMetadata" value="https://adfs2019.cloud.edu.vn/FederationMetadata/2007-06/FederationMetadata.xml" />
+<add key="ida:ADFSMetadata" value="https://adfs.company.vn/FederationMetadata/2007-06/FederationMetadata.xml" />
 </appSettings>
 
 <system.web>
@@ -32,14 +32,14 @@
 </securityTokenHandlerConfiguration>
 </securityTokenHandlers>
 <issuerNameRegistry type="System.IdentityModel.Tokens.ValidatingIssuerNameRegistry, System.IdentityModel.Tokens.ValidatingIssuerNameRegistry">
-<authority name="http://adfs2019.cloud.edu.vn/adfs/services/trust">
+<authority name="http://adfs.company.vn/adfs/services/trust">
 <keys>
 <!-- Add the thumbprint of the ADFS signing certificate here -->
 <add thumbprint="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" />
 </keys>
 <validIssuers>
 <!-- Add the issuer name of the ADFS server here -->
-<add name="http://adfs2019.cloud.edu.vn/adfs/services/trust" />
+<add name="http://adfs.company.vn/adfs/services/trust" />
 </validIssuers>
 </authority>
 </issuerNameRegistry>
