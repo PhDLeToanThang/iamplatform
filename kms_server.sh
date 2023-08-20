@@ -10,7 +10,7 @@ cd /opt/
 # Download source KMS Server
 
 git clone https://github.com/kebe7jun/linux-kms-server
-#Tao user
+#Tạo user
 useradd -s /usr/sbin/nologin -r -M vlmcsd
 #Cai dat KMS Server
 cd /opt/linux-kms-server/vlmcsd/
