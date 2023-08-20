@@ -6,7 +6,7 @@ sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get install build-essential nano git net-tools -y
 cd /opt/
-sudo -sau
+
 # Download source KMS Server
 
 git clone https://github.com/kebe7jun/linux-kms-server
