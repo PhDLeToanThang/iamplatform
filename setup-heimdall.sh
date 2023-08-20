@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 clear
 cd ~
 ############### Tham số cần thay đổi ở đây ###################
