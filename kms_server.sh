@@ -31,8 +31,8 @@ ExecStart=/opt/linux-kms-server/vlmcsd/vlmcsd -l /var/log/vlmcsd
 [Install]
 WantedBy=multi-user.target
 
-mkdir /var/log/lvmcsd
-chown vlmcsd:vlmcsd /var/log/vlmcsd
+mkdir /var/log/vlmcsd
+chown vlmcsd:vlmcsd /var/log/vlmcsd/
 
 #Start/stop service
 systemctl start vlmcsd
