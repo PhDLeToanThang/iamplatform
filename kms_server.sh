@@ -1,4 +1,4 @@
-#!/bash/bin
+#!/bin/sh
 #Cách cài đặt VM Ubuntu Linux trên ESXi làm KMS Server
 
 #build KMS Server
