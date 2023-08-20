@@ -17,19 +17,17 @@ cd /opt/linux-kms-server/vlmcsd/
 make
 
 #copy /paste
-nano /lib/systemd/system/vlmcsd.service
-[Unit]
-Description=vlmcsd KMS emulator service
-After=network-online.target
-Wants=network-online.target
-
-[Service]
-Type=forking
-User=vlmcsd
-ExecStart=/opt/linux-kms-server/vlmcsd/vlmcsd -l /var/log/vlmcsd
-
-[Install]
-WantedBy=multi-user.target
+# nano /lib/systemd/system/vlmcsd.service
+echo '[Unit]' >> /lib/systemd/system/vlmcsd.service
+echo 'Description=vlmcsd KMS emulator service' >> /lib/systemd/system/vlmcsd.service
+echo 'After=network-online.target' >> /lib/systemd/system/vlmcsd.service
+echo 'Wants=network-online.target' >> /lib/systemd/system/vlmcsd.service
+echo '[Service]' >> /lib/systemd/system/vlmcsd.service
+echo 'Type=forking' >> /lib/systemd/system/vlmcsd.service
+echo 'User=vlmcsd' >> /lib/systemd/system/vlmcsd.service
+echo 'ExecStart=/opt/linux-kms-server/vlmcsd/vlmcsd -l /var/log/vlmcsd' >> /lib/systemd/system/vlmcsd.service
+echo '[Install]' >> /lib/systemd/system/vlmcsd.service
+echo 'WantedBy=multi-user.target' >> /lib/systemd/system/vlmcsd.service
 
 mkdir /var/log/vlmcsd
 chown vlmcsd:vlmcsd /var/log/vlmcsd/
@@ -61,7 +59,3 @@ ifconfig
 #	cscript	ospp.vbs /inpkey: xxxx-xxxx-xxxx-xxxx-xxxx
 #	cscript ospp.vbs /act
 #	cscript ospp.vbs /dstatusall
-#
-#
-# 	[Học MCSA 2022] Hướng dẫn cài đặt KMS Server trên Linux
-#	https://www.youtube.com/watch?v=STF0VVKZzHY
