@@ -89,7 +89,6 @@ Hãy hướng dẫn chi tiết từng bước để tôi có thể cài và cấ
 
 Như vậy, nếu triển khai MFA và Multi Factors "đa yếu tố xác thực/ nhiều kiểu-phương thức xác thực" sẽ linh hoạt hơn cho Admin và người dùng trong Doanh nghiệp, tiến đến tích hợp xác thực 1 lần "SSO -LDAPs" tính thống nhất cao trong Quản lý, cấp phát và xác thực danh tính người dùng 1 lần.
 
-
 ## D. Phân loại cách thức triển khai MFA và Multi-Factors:
 ### 5.1. Trường hợp 1. MFA cho từng ứng dụng cụ thể triển khai khả thi:
 #### 5.1.1. Màn hình Portal Workspace cho từng use người dùng có màn Pincode TOTP của Web/Outlook Email 
@@ -104,7 +103,7 @@ Như vậy, nếu triển khai MFA và Multi Factors "đa yếu tố xác thực
 
 ### 5.2. Trường hợp 2. MFA cho từng ứng dụng cụ thể triển khai khả thi nhưng chính sách sử dụng 2FA của Doanh nghiệp không cho phép:
 #### 5.2.1. Đề xuất màn Authenticator Multi-Factor và Multi-User TOTP để một số trong nhóm Leaders/Co-hort được quyền cung cấp PinCode cho người dùng Web/Outlook Email (trên Thiết bị Tablet/ipad đặt tại Bộ phận IT Audit của Doanh nghiệp). 
-###- Rủi ro: 
+### - Rủi ro: 
 5.2.1.1. Quá nhiều người yêu cầu khi login Web/Outlook, IT Audit bận lo việc khác không hồi đáp thông tin pincode thay đổi sau 30s.
 
 5.2.1.2. Nếu đã thêm Authenticator xác thực OuAth hoặc Software TOTP của mọi người vào cùng 1 thiết bị đặt lại Doanh nghiệp, thì các dịch vụ Web/Outlook bắt xác thực bằng 2FA sẽ không thể thêm ở nới khác (ví dụ: nhà riêng hoặc thiết bị xác thực thứ 3 cho cá nhân người dùng).
@@ -112,7 +111,7 @@ Như vậy, nếu triển khai MFA và Multi Factors "đa yếu tố xác thực
 5.2.1.3. Màn hình để tiếp nhận Multi-factor cho multi-user TOTP phải đủ lớn vì rất nhiều dòng TOTP xuất hiện cùng lúc, phải tra cứu tìm kiếm theo người dùng nên phải ghi thông tin đăng ký App Auth dễ hiểu, chính xác, Phải backup thường xuyên các RSA Token Encryption của người dùng để tránh sự cố mất dữ liệu Vault Keys...
 
 ### 5.2.2. Đề xuất dùng Khóa cứng HOTP như yubikey/HOTP token/TrustedKey...  
-###- Rủi ro: 
+### - Rủi ro: 
 5.2.2.1. Chính sách chặn dùng USB sẽ khó đảm bảo khi mọi người đều dùng USB Token.
 
 5.2.2.2. Các USB key đều cần có Token Manager để quản lý/xóa/sửa/thu hồi/renew CA nên vẫn phải vá lỗi nâng cấp bảo mật SSL/TLS token.
@@ -124,7 +123,7 @@ Như vậy, nếu triển khai MFA và Multi Factors "đa yếu tố xác thực
 
 5.3.2. Ví dụ 3. Cloud Edge - Remote Control Cloud tích hợp MFA - TOTP source code/Plugin: MFA-TOTP 
 
-####- Hệ thống Điện toán này quản lý các kết nối Remote tới Máy Chủ Ảo/ HĐH máy client đã cài các phần mềm (không có source code để sửa).
+#### - Hệ thống Điện toán này quản lý các kết nối Remote tới Máy Chủ Ảo/ HĐH máy client đã cài các phần mềm (không có source code để sửa).
 Lưu ý: Các phần mềm trên vẫn cho phép cài lại, cài mới trên các HĐH phiên bản cũ 32/64bit ví dụ: Windows XP/Win7/8x/10x/11x/12x hoặc 2k3 64bit/ 2k8 x64bit/2k12 x63bit/2k16/2k19/2k22... Linux x64bit.
 
-####- Hệ thống giải pháp "Điện toán ứng dụng - Cloud App" hoặc Web hóa toàn bộ ứng dụng theo chuẩn HTML5 hoặc K8s sẽ giúp tích hợp MFA và TOTP trên tầng Portal Workspace của người dùng, dẽ dàng tích hợp SSO - LDAPs ở tầng ứng dụng phần mềm (không có source code để sửa) vì cấu hình giữa HĐH của máy người dùng và Windows Authenticate Apps là có sẵn các phương thức cấu hình bypass hoặc Use Passkey dựa trên thư viện phần mềm hãng thứ 3 với HĐH ví dụ: Github, Google, Linkedin Login với Windows Authenticate.
+#### - Hệ thống giải pháp "Điện toán ứng dụng - Cloud App" hoặc Web hóa toàn bộ ứng dụng theo chuẩn HTML5 hoặc K8s sẽ giúp tích hợp MFA và TOTP trên tầng Portal Workspace của người dùng, dẽ dàng tích hợp SSO - LDAPs ở tầng ứng dụng phần mềm (không có source code để sửa) vì cấu hình giữa HĐH của máy người dùng và Windows Authenticate Apps là có sẵn các phương thức cấu hình bypass hoặc Use Passkey dựa trên thư viện phần mềm hãng thứ 3 với HĐH ví dụ: Github, Google, Linkedin Login với Windows Authenticate.
