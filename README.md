@@ -18,7 +18,7 @@ ví dụ 2: https://github.com/causefx/Organizr/tree/v2-master/api/functions
 ví dụ 3: Tạo cấu hình LDAP/OpenLDAP cho Portal PHP: https://docs.organizr.app/features/authentication-backends/ldap-backend
 
 ----
-# Phân tích dự án cần MFA và kích hoạt các phương thức xác thực 2 yếu tố "2FA" hoặc đa yếu tố "Multi Factors":
+# Phân tích dự án cần MFA và kích hoạt các phương thức xác thực 2 yếu tố "2FA" hoặc đa yếu tố "Multi Factors Authenticator":
 
 ## A. Thảo luận 1:
 Hãy hướng dẫn chi tiết từng bước để tôi có thể cài và cấu hình Microsoft MFA và cấu hình để có hình thức TOTP pin code?
