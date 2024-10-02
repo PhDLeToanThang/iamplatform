@@ -37,13 +37,13 @@ Hãy hướng dẫn chi tiết từng bước để tôi có thể cài và cấ
 2.1. Các chính sách bảo mật, an ninh an toàn thông tin và luật riêng tư cá nhân người dùng trong một tổ chức Doanh nghiệp, loại hình Doanh nghiệp:
 
 - ví dụ: FDI vốn Nhật bản, Hàn Quốc...
-  
+
 2.2. Hình thức tổ chức lĩnh vực hoạt động Doanh nghiệp:
 
 - ví dụ: In ấn thiết kế tài liệu: AbeHN,  CNC/CAD-CAM... trong sản xuất sản phẩm công nghệ cao: STV ...)
 
 3. Các thiết bị ngoại vi có đấu nối, chuyền dữ liệu trực tiếp hoặc gián tiếp qua:
-   
+
 3.1. Bluetooth transfer files hoặc NFC replicate...,
 
 3.2. SMPP SMS topup..., 
@@ -104,7 +104,7 @@ Như vậy, nếu triển khai MFA và Multi Factors "đa yếu tố xác thực
 
 ### 5.2. Trường hợp 2. MFA cho từng ứng dụng cụ thể triển khai khả thi nhưng chính sách sử dụng 2FA của Doanh nghiệp không cho phép:
 #### 5.2.1. Đề xuất màn Authenticator Multi-Factor và Multi-User TOTP để một số trong nhóm Leaders/Co-hort được quyền cung cấp PinCode cho người dùng Web/Outlook Email (trên Thiết bị Tablet/ipad đặt tại Bộ phận IT Audit của Doanh nghiệp). 
-### - Rủi ro: 
+### - Rủi ro:
 5.2.1.1. Quá nhiều người yêu cầu khi login Web/Outlook, IT Audit bận lo việc khác không hồi đáp thông tin pincode thay đổi sau 30s.
 
 5.2.1.2. Nếu đã thêm Authenticator xác thực OuAth hoặc Software TOTP của mọi người vào cùng 1 thiết bị đặt lại Doanh nghiệp, thì các dịch vụ Web/Outlook bắt xác thực bằng 2FA sẽ không thể thêm ở nới khác (ví dụ: nhà riêng hoặc thiết bị xác thực thứ 3 cho cá nhân người dùng).
