@@ -8,6 +8,8 @@
 
 - MFA/TOTP (Multi-Factor Authentication với Time-based One-Time Password).
 
+![image](https://github.com/user-attachments/assets/85567748-d704-4432-9e87-eb7e5e9bf29f)
+
 ---
 
 ### 🧩 1. Kiến trúc tổng quan
