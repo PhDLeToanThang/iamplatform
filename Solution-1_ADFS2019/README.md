@@ -156,3 +156,7 @@ Microsoft ADFS 2019 sẽ đóng vai trò là Identity Provider (IdP), hỗ trợ
 - Khi triển khai qua **WAP + ADFS**, người dùng có thể truy cập Power BI Report Server từ Internet với MFA, mà không cần VPN.
 
 ---
+
+## Logic Topology tích hợp ADFS với PBIRS:
+
+![image](https://github.com/user-attachments/assets/e0712ddf-401c-46ba-be02-fd3797e38524)
