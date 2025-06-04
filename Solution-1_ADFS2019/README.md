@@ -8,7 +8,7 @@
 
 - MFA/TOTP (Multi-Factor Authentication với Time-based One-Time Password).
 
-![image](https://raw.githubusercontent.com/PhDLeToanThang/iamplatform/refs/heads/main/Solution-1_ADFS2019/ADFS2019.drawio.svg?token=GHSAT0AAAAAADE5SCP22ILXFLCNBQDGMIR62B73OCA)
+![image](https://github.com/PhDLeToanThang/iamplatform/blob/main/Solution-1_ADFS2019/ADFS2019.drawio.svg)
 
 ---
 
