@@ -159,4 +159,4 @@ Microsoft ADFS 2019 sẽ đóng vai trò là Identity Provider (IdP), hỗ trợ
 
 ## Logic Topology tích hợp ADFS với PBIRS:
 
-![image](https://raw.githubusercontent.com/PhDLeToanThang/iamplatform/refs/heads/main/Solution-1_ADFS2019/ADFS2019_PBIRS.drawio.svg?token=GHSAT0AAAAAADE5SCP235LO26NDX7OM3P442B74NPQ)
+![image](https://github.com/PhDLeToanThang/iamplatform/blob/main/Solution-1_ADFS2019/ADFS2019_PBIRS.drawio.svg)
